@@ -13,22 +13,21 @@ needed files to get started quickly.
 This skeleton will provides:
 
 - puppet-lint compliant files
-- params, install, config and service classes templates
+- params, install, config, service and monitoring classes templates
 - puppetlabs_spec_helper's Rakefile, .fixtures.yml and spec_helper.rb
-- basic spec/classes/ntp_spec.rb file to start with
+- Provided puppetlabs_spec_helper by a iWeb special wrapper
+- Ready to deploy as Snapshot or Release on Nexus bin repo
+- basic spec/classes/yourmodulename_spec.rb file to start with
 - Same Modulefile and README than the one that comes with puppet
+- Bundler ready Gemfile
 
 This will not replace the files that comes with the puppet module tool, but puppet module will only install the one you have in ~/.puppet/var/puppet-module/skeleton if you have this directory.
 
 ## Requirements
 
 - puppet module tool (comes with puppet 2.7.14 or PE 2.5 and later)
-- puppetlabs_spec_helper gem
-- rake
-
-## Optional requirements
-
-- puppet-lint
+- iweb_module_helper gem
+- Bundler
 
 ## Installation
 
@@ -58,14 +57,19 @@ The output should be:
     user-ntp/manifests/service.pp
     user-ntp/spec
     user-ntp/spec/classes
-    user-ntp/spec/classes/ntp_spec.rb
+    user-ntp/spec/classes/yourmodulename_spec.rb
     user-ntp/spec/spec_helper.rb
     user-ntp/tests
     user-ntp/tests/init.pp
 
+You will have to modify the name of the spec file `spec/classes/yourmodulename_spec.rb` I did not find a way to autogenerate it with the module name.
+
 ## Then?
 
-Then, run rake, and get the puppetlabs_spec_helper bliss. Feel free to fork and adapt it to your liking.
+Then, run : 
+```
+bundle install --path=../vendor
+bundle exec rake <all the awesome command you want>
 
 ## Links
 
@@ -77,5 +81,7 @@ The following links will help to get the most out of this skeleton and puppetlab
 - https://puppetlabs.com/blog/module-of-the-week-puppet-module-tool-part-1/
 - https://puppetlabs.com/blog/module-of-the-week-puppet-module-tool-part-2/
 
-## TODO
-- Push most of the changes upstream ; )
+## Credits
+
+This project come from Simon Piette and we simply modified it for our internal need.
+Original project : https://github.com/spiette/puppet-module-skeleton
