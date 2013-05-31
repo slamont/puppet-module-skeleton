@@ -1,0 +1,10 @@
+# THIS FILE IS MANAGED BY PUPPET
+#
+
+#This will be the params passed from the main class to config
+<%%= @the_example_param %>
+
+#This should show you how to get the values from a hash
+<%% @the_example_hash.each do |key, value| -%>
+The given key "<%%= key %>" got "<%%= value %>" as value 
+<%% end -%>
