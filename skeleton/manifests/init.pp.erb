@@ -24,11 +24,18 @@
 #
 # Copyright 2013 Your name here, unless otherwise noted.
 #
-class <%= metadata.name %> () {
-  anchor { "${module_name}::begin": } ->
+class <%= metadata.name %> (
+  $example_param = "Example Value",
+  $example_hash = {
+    'ex_key1' => 'ex_value1',
+    'ex_key2' => 'ex_value2',
+  }
+) {
   class {"${module_name}::install": } ->
   class {"${module_name}::config": } ~>
-  class {"${module_name}::service": } ~>
-  class {"${module_name}::monitoring": } ~>
-  anchor { "${module_name}::end": }
+  class {"${module_name}::service": } ->
+  # monitoring is a suggestion and can simply be remove if not needed
+  class {"${module_name}::monitoring": } ->
+  # Simplified Anchor Pattern w/o dependency to stdlib
+  Class["${module_name}"]  
 }

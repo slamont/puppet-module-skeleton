@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe '<%= metadata.name %>' do
-  let(:title) { '<%= metadata.name %>' }
+  let(:title) { '[ <%= metadata.name %> ]' }
 
   ['Debian', 'RedHat'].each do |osfamily|
     describe "<%= metadata.name %> class without any parameters on #{osfamily}" do 
@@ -12,8 +12,33 @@ describe '<%= metadata.name %>' do
       it { should create_package('<%= metadata.name %>') }
       it { should create_file('/etc/<%= metadata.name %>.conf') }
       it {
-        should create_file('/etc/<%= metadata.name %>.conf')\
-        .with_content(/^server pool.<%= metadata.name %>.org$/)
+        should create_file('/etc/<%= metadata.name %>_example.conf')\
+        .with_content(/Example Value/)\
+        .with_content(/The given key \"ex_key1\" got \"ex_value1\" as value/)\
+        .with_content(/The given key \"ex_key2\" got \"ex_value2\" as value/)
+      }
+      if osfamily == 'RedHat' 
+        it { should create_service('<%= metadata.name %>d') }
+      else
+        it { should create_service('<%= metadata.name %>') }
+      end
+    end
+    describe "<%= metadata.name %> class with parameters on #{osfamily}" do 
+      let(:params) {{ 
+        :example_param => 'Wow',
+        :example_hash => {
+          'new_key' => 'new_value',
+        }
+      }}
+      let(:facts) { { :osfamily => osfamily } }
+
+      it { should create_class('<%= metadata.name %>') }
+      it { should create_package('<%= metadata.name %>') }
+      it { should create_file('/etc/<%= metadata.name %>.conf') }
+      it {
+        should create_file('/etc/<%= metadata.name %>_example.conf')\
+        .with_content(/Wow/)\
+        .with_content(/The given key \"new_key\" got \"new_value\" as value/)
       }
       if osfamily == 'RedHat' 
         it { should create_service('<%= metadata.name %>d') }

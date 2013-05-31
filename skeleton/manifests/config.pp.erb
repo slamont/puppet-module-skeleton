@@ -15,14 +15,20 @@
 #    }
 #  }
 class <%= metadata.name %>::config(
-    $servers=$<%= metadata.name %>::servers,
-    $options=$<%= metadata.name %>::options,
-    ) {
+    $the_example_param = $<%= metadata.name %>::example_param,
+    $the_example_hash = $<%= metadata.name %>::example_hash,
+) {
   include <%= metadata.name %>::params
   file { $<%= metadata.name %>::params::conffile:
     ensure  => present,
     mode    => '0440',
-    content => template('<%= metadata.name %>/<%= metadata.name %>.conf.erb')
+    source => 'puppet:///modules/<%= metadata.name %>/yourmodulename.conf'
+  }
+
+  file { "$<%= metadata.name %>::params::example_file":
+    ensure  => present,
+    mode    => '0440',
+    content => template('<%= metadata.name %>/example.conf.erb')
   }
 }
 

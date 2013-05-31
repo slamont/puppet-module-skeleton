@@ -3,10 +3,11 @@
 # It set variable according to platform
 class <%= metadata.name %>::params {
   $pkgname = '<%= metadata.name %>'
-  $conffile = '<%= metadata.name %>/etc/<%= metadata.name %>.conf'
+  $conffile = '/etc/<%= metadata.name %>.conf'
+  $example_file = '/etc/<%= metadata.name %>_example.conf'
   $service = $::osfamily ? {
     'Debian' => '<%= metadata.name %>',
-    'RedHat' => '<%= metadata.name %>',
+    'RedHat' => '<%= metadata.name %>d',
     default  => fail('unsupported platform')
   }
 }
