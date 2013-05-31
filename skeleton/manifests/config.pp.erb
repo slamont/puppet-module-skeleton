@@ -22,10 +22,10 @@ class <%= metadata.name %>::config(
   file { $<%= metadata.name %>::params::conffile:
     ensure  => present,
     mode    => '0440',
-    source => 'puppet:///modules/<%= metadata.name %>/yourmodulename.conf'
+    source  => 'puppet:///modules/<%= metadata.name %>/yourmodulename.conf'
   }
 
-  file { "$<%= metadata.name %>::params::example_file":
+  file { $<%= metadata.name %>::params::example_file:
     ensure  => present,
     mode    => '0440',
     content => template('<%= metadata.name %>/example.conf.erb')
