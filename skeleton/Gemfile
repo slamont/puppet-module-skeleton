@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
 gem 'rake', '~> 10.0'
-gem 'puppet', '~> 3.1'
+gem 'puppet', '~> 3.2'
 gem 'iweb_module_helper', :git => 'git://git.privatedns.com/puppet-modules/iweb_module_helper'

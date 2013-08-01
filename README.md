@@ -13,7 +13,7 @@ needed files to get started quickly.
 This skeleton will provides:
 
 - puppet-lint compliant files
-- params, install, config, service and monitoring classes templates
+- params, install, config and service classes templates
 - puppetlabs_spec_helper's Rakefile, .fixtures.yml and spec_helper.rb
 - Provided puppetlabs_spec_helper by a iWeb special wrapper
 - Ready to deploy as Snapshot or Release on Nexus bin repo
@@ -28,6 +28,7 @@ This will not replace the files that comes with the puppet module tool, but pupp
 - puppet module tool (comes with puppet 2.7.14 or PE 2.5 and later)
 - iweb_module_helper gem
 - Bundler
+- stdlib module from puppetlabs
 
 ## Installation
 

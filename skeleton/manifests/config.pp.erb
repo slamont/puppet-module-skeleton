@@ -19,13 +19,18 @@ class <%= metadata.name %>::config(
     $the_example_hash = $<%= metadata.name %>::example_hash,
 ) {
   include <%= metadata.name %>::params
-  file { $<%= metadata.name %>::params::conffile:
+
+  # We bring variables from params to the local scope
+  $conffile = $<%= metadata.name %>::params::conffile
+  $example_file = $<%= metadata.name %>::params::example_file
+
+  file { $conffile :
     ensure  => present,
     mode    => '0440',
     source  => 'puppet:///modules/<%= metadata.name %>/yourmodulename.conf'
   }
 
-  file { $<%= metadata.name %>::params::example_file:
+  file { $example_file :
     ensure  => present,
     mode    => '0440',
     content => template('<%= metadata.name %>/example.conf.erb')
