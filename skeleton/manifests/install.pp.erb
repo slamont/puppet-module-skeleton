@@ -3,7 +3,11 @@
 # It install requires packages
 class <%= metadata.name %>::install {
   include <%= metadata.name %>::params
-  package { $<%= metadata.name %>::params::pkgname:
+
+  # We bring variables from params to the local scope
+  $pkgname = $<%= metadata.name %>::params::pkgname
+
+  package { $pkgname:
     ensure => present,
   }
 }

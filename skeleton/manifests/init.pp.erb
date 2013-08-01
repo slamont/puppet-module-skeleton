@@ -31,11 +31,10 @@ class <%= metadata.name %> (
     'ex_key2' => 'ex_value2',
   }
 ) {
-  class {"${module_name}::install": } ->
-  class {"${module_name}::config": } ~>
-  class {"${module_name}::service": } ->
-  # monitoring is a suggestion and can simply be remove if not needed
-  class {"${module_name}::monitoring": } ->
-  # Simplified Anchor Pattern w/o dependency to stdlib
-  Class['<%= metadata.name %>']
+  anchor { "${module_name}::begin" :     } ->
+  class  { "${module_name}::params" :    } ->
+  class  { "${module_name}::install" :   } ->
+  class  { "${module_name}::config" :    } ~>
+  class  { "${module_name}::service" :   } ->
+  anchor { "${module_name}::core::end" : }
 }
