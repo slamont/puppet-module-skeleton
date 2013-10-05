@@ -6,7 +6,7 @@ class <%= metadata.name %>::service {
 
   # We bring variables from params to the local scope
   $service = $<%= metadata.name %>::params::service
-  
+
   service { $service :
     ensure => running,
     enable => true,
