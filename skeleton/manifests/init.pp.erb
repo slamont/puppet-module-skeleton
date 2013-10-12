@@ -32,5 +32,5 @@ class <%= metadata.name %> (
   class  { "${module_name}::install" :   } ->
   class  { "${module_name}::config" :    } ~>
   class  { "${module_name}::service" :   } ->
-  anchor { "${module_name}::core::end" : }
+  anchor { "${module_name}::end" : }
 }
