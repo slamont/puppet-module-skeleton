@@ -1,7 +1,7 @@
 # == Class <%= metadata.name %>::intall
 # This class is meant to be called from <%= metadata.name %>
 # It install requires packages
-class <%= metadata.name %>::install {
+class <%= metadata.name %>::install inherits <%= metadata.name %> {
   include <%= metadata.name %>::params
 
   # We bring variables from params to the local scope

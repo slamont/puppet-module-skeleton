@@ -25,14 +25,10 @@
 # Copyright 2013 Your name here, unless otherwise noted.
 #
 class <%= metadata.name %> (
-  $example_param = 'Example Value',
-  $example_hash = {
-    'ex_key1' => 'ex_value1',
-    'ex_key2' => 'ex_value2',
-  }
-) {
+  $example_param = ${module_name}::params::example_param,
+  $example_hash = ${module_name}::params::example_hash,
+) inherits <%= metadata.name %>::params {
   anchor { "${module_name}::begin" :     } ->
-  class  { "${module_name}::params" :    } ->
   class  { "${module_name}::install" :   } ->
   class  { "${module_name}::config" :    } ~>
   class  { "${module_name}::service" :   } ->

@@ -17,12 +17,7 @@
 class <%= metadata.name %>::config(
     $the_example_param = $<%= metadata.name %>::example_param,
     $the_example_hash = $<%= metadata.name %>::example_hash,
-) {
-  include <%= metadata.name %>::params
-
-  # We bring variables from params to the local scope
-  $conffile = $<%= metadata.name %>::params::conffile
-  $example_file = $<%= metadata.name %>::params::example_file
+)  inherits <%= metadata.name %> {
 
   file { $conffile :
     ensure  => present,
