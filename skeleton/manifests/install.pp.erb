@@ -2,11 +2,6 @@
 # This class is meant to be called from <%= metadata.name %>
 # It install requires packages
 class <%= metadata.name %>::install inherits <%= metadata.name %> {
-  include <%= metadata.name %>::params
-
-  # We bring variables from params to the local scope
-  $pkgname = $<%= metadata.name %>::params::pkgname
-
   package { $pkgname:
     ensure => present,
   }
